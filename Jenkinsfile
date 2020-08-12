@@ -23,7 +23,7 @@ pipeline {
       steps {
         echo 'Packaging cart app'
         sh 'mvn package -DskipTests'
-        archiveArtifacts artifacts: '**/targets/*.jar', fingerprint: true
+        archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
       }
     }
   }
