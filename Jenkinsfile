@@ -1,11 +1,5 @@
 pipeline {
-
   agent any
-
-  tools {
-    maven 'Maven 3.6.3'
-  }
-
   stages {
     stage('build') {
       steps {
@@ -13,18 +7,24 @@ pipeline {
         sh 'mvn compile'
       }
     }
+
     stage('test') {
       steps {
         echo 'Testing cart app'
         sh 'mvn clean test'
       }
     }
+
     stage('package') {
       steps {
         echo 'Packaging cart app'
         sh 'mvn package -DskipTests'
-        archiveArtifacts artifacts: '**/targets/*.jar', fingerprint: true
+        archiveArtifacts(artifacts: '**/target/*.jar', fingerprint: true)
       }
     }
+
+  }
+  tools {
+    maven 'Maven 3.6.3'
   }
 }
